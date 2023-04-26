@@ -2,71 +2,73 @@ package com.example.bookstore.controller;
 
 import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Category;
-import com.example.bookstore.controller.exception.BookNotFoundException;
 import com.example.bookstore.repository.BookRepository;
+import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
-    // Add new book
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book savedBook = bookRepository.save(book);
-        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
+    private final BookService bookService;
+
+    public BookController(BookRepository bookRepository, BookService bookService) {
+        this.bookRepository = bookRepository;
+        this.bookService = bookService;
     }
 
-    // Delete a book by ID
+    @PostMapping
+    public Book addBook(@RequestBody Book book) {
+        return bookService.createBook(book);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBookById(@PathVariable Long id) {
-        if (!bookRepository.existsById(id)) {
-            throw new BookNotFoundException("Book not found with ID " + id);
-        }
+    public ResponseEntity<String> deleteBook(@PathVariable Long id) {
         bookRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>("Book deleted successfully", HttpStatus.OK);
     }
 
-    // Get a book by ID
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
-        Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Book not found with ID " + id));
-        return new ResponseEntity<>(book, HttpStatus.OK);
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
+            return new ResponseEntity<>(optionalBook.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    // Get books by category
-    @GetMapping("/category/{category}")
-    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable String category) {
-        List<Book> books = bookRepository.findByCategory(Category.valueOf(category));
+    @GetMapping("/title/{title}")
+    public ResponseEntity<List<Book>> searchBooksByName(@PathVariable String title) {
+        List<Book> books = bookRepository.findByTitle(title);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
-    // Get books by author
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Category category) {
+        List<Book> books = bookRepository.findByCategory(category);
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
     @GetMapping("/author/{author}")
     public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
         List<Book> books = bookRepository.findByAuthor(author);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
-    // Get all books
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
-        return new ResponseEntity<>(books, HttpStatus.OK);
-    }
-
-    // Search book by name
-    @GetMapping("/search")
-    public ResponseEntity<List<Book>> searchBooksByName(@RequestParam String name) {
-        List<Book> books = bookRepository.findByTitleContainingIgnoreCase(name);
-        return new ResponseEntity<>(books, HttpStatus.OK);
+    public List<Book> getAllBooks() {
+//        List<Book> books = bookRepository.findAll();
+//        return new ResponseEntity<>(books, HttpStatus.OK);
+        return bookService.getAllBooks();
     }
 }
+

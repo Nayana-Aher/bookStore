@@ -1,6 +1,6 @@
 package com.example.bookstore.service;
 
-import com.example.bookstore.controller.exception.CategoryNotFoundException;
+import com.example.bookstore.exception.CategoryNotFoundException;
 import com.example.bookstore.model.Category;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,7 @@
 package com.example.bookstore.model;
 
 public enum Category {
-    TECHNICAL,
-    LITERATURE,
+    Technical, Literature,
     HUMOUR,
     POETRY,
     SCIENCE_FICTION;

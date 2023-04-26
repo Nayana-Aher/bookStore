@@ -1,4 +1,4 @@
-package com.example.bookstore.controller.exception;
+package com.example.bookstore.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -8,9 +8,6 @@ public class BookNotFoundException extends RuntimeException {
 
     public BookNotFoundException(Long id) {
         super("Could not find book with id: " + id);
-    }
-    public BookNotFoundException(String message) {
-        super(message);
     }
 
 }

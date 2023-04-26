@@ -3,23 +3,23 @@ package com.example.bookstore.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "title")
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "author")
     private String author;
 
-    @Column(nullable = false)
+    @Column(name = "category")
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Column(nullable = false)
+    @Column(name = "price")
     private double price;
 
     public Book() {}
