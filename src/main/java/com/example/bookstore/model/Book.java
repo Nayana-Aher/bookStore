@@ -16,15 +16,15 @@ public class Book {
     private String author;
 
     @Column(name = "category")
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    //@Enumerated(EnumType.STRING)
+    private String category;
 
     @Column(name = "price")
     private double price;
 
     public Book() {}
 
-    public Book(String title, String author, Category category, double price) {
+    public Book(String title, String author, String category, double price) {
         this.title = title;
         this.author = author;
         this.category = category;
@@ -44,7 +44,7 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        this.title = this.title;
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -55,11 +55,11 @@ public class Book {
         this.author = author;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

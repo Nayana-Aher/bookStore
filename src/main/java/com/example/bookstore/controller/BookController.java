@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequestMapping("/books")
 public class BookController {
 
+    @Autowired DataSource dataSource;
     private final BookRepository bookRepository;
 
     private final BookService bookService;
@@ -26,8 +28,14 @@ public class BookController {
     }
 
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
-        return bookService.createBook(book);
+    public ResponseEntity<String> addBook(@RequestBody Book book) {
+        System.out.println("getCategory:::"+book.getCategory());
+        System.out.println("getAuthor:::"+book.getAuthor());
+        System.out.println("getTitle:::"+book.getTitle());
+        System.out.println("getId:::"+book.getId());
+        System.out.println("getPrice:::"+book.getPrice());
+        bookRepository.save(book);
+        return new ResponseEntity<>("Book added successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -53,7 +61,7 @@ public class BookController {
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Category category) {
+    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable String category) {
         List<Book> books = bookRepository.findByCategory(category);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
@@ -66,8 +74,6 @@ public class BookController {
 
     @GetMapping
     public List<Book> getAllBooks() {
-//        List<Book> books = bookRepository.findAll();
-//        return new ResponseEntity<>(books, HttpStatus.OK);
         return bookService.getAllBooks();
     }
 }

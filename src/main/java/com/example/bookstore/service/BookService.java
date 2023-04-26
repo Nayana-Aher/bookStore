@@ -18,7 +18,7 @@ public class BookService {
     }
 
     public Book createBook(Book book) {
-        //return bookRepository.save(book);
+
         Book savedBook = bookRepository.save(book);
         if (savedBook == null) {
             System.out.println("Failed to save book: " + book);
@@ -32,7 +32,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public List<Book> getBooksByCategory(Category category) {
+    public List<Book> getBooksByCategory(String category) {
         return bookRepository.findByCategory(category);
     }
 

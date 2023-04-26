@@ -11,25 +11,25 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
 
-    public List<Category> getAllCategories() {
-        return Arrays.asList(Category.values());
-    }
+//    public List<Category> getAllCategories() {
+//        return Arrays.asList(Category.values());
+//    }
 
-    public Category getCategoryByName(String name) {
-        return Arrays.stream(Category.values())
-                .filter(category -> category.name().equalsIgnoreCase(name))
-                .findFirst()
-                .orElseThrow(() -> new CategoryNotFoundException("Category not found with name " + name));
-    }
-
-    public List<Category> getCategoriesByType(String type) {
-        try {
-            return Arrays.stream(Category.values())
-                    .filter(category -> category.getType().equalsIgnoreCase(type))
-                    .collect(Collectors.toList());
-        } catch (IllegalArgumentException ex) {
-            throw new CategoryNotFoundException("Invalid category type: " + type);
-        }
-    }
+//    public Category getCategoryByName(String name) {
+//        return Arrays.stream(Category.values())
+//                .filter(category -> category.name().equalsIgnoreCase(name))
+//                .findFirst()
+//                .orElseThrow(() -> new CategoryNotFoundException("Category not found with name " + name));
+//    }
+//
+//    public List<Category> getCategoriesByType(String type) {
+//        try {
+//            return Arrays.stream(Category.values())
+//                    .filter(category -> category.getType().equalsIgnoreCase(type))
+//                    .collect(Collectors.toList());
+//        } catch (IllegalArgumentException ex) {
+//            throw new CategoryNotFoundException("Invalid category type: " + type);
+//        }
+//    }
 }
 
