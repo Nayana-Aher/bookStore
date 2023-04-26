@@ -1,5 +1,6 @@
 package com.example.bookstore.model;
 
+import com.sun.istack.NotNull;
 import javax.persistence.*;
 
 @Entity
@@ -9,17 +10,18 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(nullable = false,name = "title")
     private String title;
 
-    @Column(name = "author")
+    @Column(nullable = false,name = "author")
     private String author;
 
-    @Column(name = "category")
+    @NotNull
+    @Column(nullable = false,name = "category")
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Column(name = "price")
+    @Column(nullable = false,name = "price")
     private double price;
 
     public Book() {}

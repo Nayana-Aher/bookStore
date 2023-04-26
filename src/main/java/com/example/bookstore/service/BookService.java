@@ -42,18 +42,22 @@ public class BookService {
     }
 
     public Book getBookById(Long id) throws BookNotFoundException {
-        return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+        return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found with id " +id));
     }
 
     public void deleteBook(Long id) throws BookNotFoundException {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found with id " +id));
         bookRepository.delete(book);
     }
 
     public List<Book> searchBooks(String keyword) {
         return bookRepository.findByTitleContainingIgnoreCase(keyword);
-
     }
+
+    public boolean existsById(Long id) {
+        return bookRepository.findById(id).isPresent();
+    }
+
 }
 
 
