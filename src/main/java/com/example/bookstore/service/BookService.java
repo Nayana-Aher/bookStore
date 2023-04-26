@@ -37,7 +37,8 @@ public class BookService {
     }
 
     public List<Book> getBooksByAuthor(String authorName) {
-        return bookRepository.findByAuthor(authorName);
+
+        return bookRepository.findByAuthorContainingIgnoreCase(authorName);
     }
 
     public Book getBookById(Long id) throws BookNotFoundException {
@@ -50,8 +51,7 @@ public class BookService {
     }
 
     public List<Book> searchBooks(String keyword) {
-
-        return bookRepository.findByTitle(keyword);
+        return bookRepository.findByTitleContainingIgnoreCase(keyword);
 
     }
 }

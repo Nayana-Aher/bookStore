@@ -13,10 +13,10 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByCategory(Category category);
-    List<Book> findByAuthor(String author);
-    List<Book> findByTitle(String title);
     List<Book> findAll();
+    List<Book> findByTitleContainingIgnoreCase(String title);
 
+    List<Book> findByAuthorContainingIgnoreCase(String authorName);
 }
 
 

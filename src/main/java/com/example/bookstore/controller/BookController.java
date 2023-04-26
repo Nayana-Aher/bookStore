@@ -4,7 +4,6 @@ import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Category;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +47,7 @@ public class BookController {
 
     @GetMapping("/title/{title}")
     public ResponseEntity<List<Book>> searchBooksByName(@PathVariable String title) {
-        List<Book> books = bookRepository.findByTitle(title);
+        List<Book> books = bookRepository.findByTitleContainingIgnoreCase(title);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
@@ -60,7 +59,7 @@ public class BookController {
 
     @GetMapping("/author/{author}")
     public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
-        List<Book> books = bookRepository.findByAuthor(author);
+        List<Book> books = bookRepository.findByAuthorContainingIgnoreCase(author);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
