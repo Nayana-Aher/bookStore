@@ -32,7 +32,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public List<Book> getBooksByCategory(String category) {
+    public List<Book> getBooksByCategory(Category category) {
         return bookRepository.findByCategory(category);
     }
 
