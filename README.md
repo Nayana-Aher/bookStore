@@ -19,7 +19,7 @@ To get started with the project, follow these steps:
 5. Run the project using your IDE or by running the generated jar file from the command line: `java -jar target/bookstore-0.0.1-SNAPSHOT.jar`
 
 ## API Exploring
-This application uses Swagger generates a user-friendly UI for interacting with the API. Once the application is running, navigate to http://localhost:8080/swagger-ui.html in your web browser for exploring and testing RESTful APIs.
+This application uses Swagger to generate a user-friendly UI for interacting with the API. Once the application is running, navigate to http://localhost:8080/swagger-ui.html in your web browser for exploring and testing RESTful APIs.
 
 ## Endpoints
 
