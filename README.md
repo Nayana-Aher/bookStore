@@ -1,6 +1,6 @@
 # Bookstore Application
 
-This is a simple application for managing books in a bookstore. It allows users to perform CRUD operations on a Book entity, including adding, deleting, and searching for books.
+This is a sample application for a bookstore. It provides RESTful endpoints to perform CRUD operations on books, including adding a new book, deleting a book, retrieving a book by ID, searching books by title, retrieving books by category, and retrieving all books. The application is built using Spring Boot, and uses a MySQL database to store the books.
 
 ## Technologies Used
 - Java 11
