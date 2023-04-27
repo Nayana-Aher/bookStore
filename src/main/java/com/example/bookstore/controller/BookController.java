@@ -1,21 +1,13 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.exception.BookAlreadyExistsException;
-import com.example.bookstore.exception.BookNotFoundException;
-import com.example.bookstore.exception.CategoryNotFoundException;
-import com.example.bookstore.exception.ErrorResponse;
 import com.example.bookstore.model.Book;
-import com.example.bookstore.model.Category;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

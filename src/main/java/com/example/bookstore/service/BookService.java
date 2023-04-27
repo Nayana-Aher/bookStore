@@ -37,7 +37,7 @@ public class BookService {
     public List<Book> getAllBooks() {
         List<Book> books= bookRepository.findAll();
         if (books.isEmpty()) {
-            throw new BookNotFoundException("No book found");
+            throw new BookNotFoundException("No Book Found");
         }
         return books;
     }

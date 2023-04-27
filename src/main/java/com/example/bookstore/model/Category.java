@@ -11,7 +11,4 @@ public enum Category {
         }
         return false;
     }
-    public String getType() {
-        return this.name().toLowerCase();
-    }
 }
