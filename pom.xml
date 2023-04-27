@@ -74,38 +74,28 @@
             <version>8.0.28</version>
         </dependency>
 
-        <!-- provides an implementation of the Java Bean Validation API,
-        which allows you to define constraints on the fields of your classes.
-        It provides several annotations like @NotNull and @Size to enforce constraints-->
+        <!-- This dependency pulls in the Hibernate Validator library,
+        which provides a framework for validating data in Java objects based on annotations.
+        It can be used to validate objects before they are persisted to a database or processed in any way.-->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.17.Final</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
+        <!-- This dependency pulls in the Swagger 2 library,
+        which provides tools for building, documenting, and testing RESTful APIs.
+        It includes a set of annotations that can be used to document the API,
+        as well as a UI for exploring the API. -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
 
+        <!--This dependency pulls in the Swagger UI library,
+        which is a web interface for exploring and testing RESTful APIs.
+        It uses the Swagger specification to generate a user-friendly UI for interacting with the API.-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
