@@ -118,9 +118,9 @@ public class BookService {
     }
 
     /**
-     * Takes an id as an argument and
-     * deletes the Book entity with the corresponding id, or
-     * throws a BookNotFoundException if no entity is found.
+     * Deletes a book from the database by its ID.
+     * @param id The ID of the book to be deleted.
+     * @throws BookNotFoundException if the book with the given ID is not found in the database.
      */
     public void deleteById(Long id) {
         if (!bookRepository.findById(id).isPresent()) {
