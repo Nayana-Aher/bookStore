@@ -14,21 +14,24 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Starter Web -->
+        <!-- Spring Boot Starter Web: This dependency pulls in the Spring Boot Starter Web library,
+        which provides Spring MVC and other web-related functionality-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.6.3</version>
         </dependency>
 
-        <!-- Spring Boot Starter Data JPA -->
+        <!-- Spring Boot Starter Data JPA : This dependency pulls in the Spring Boot Starter Data JPA library,
+        which provides Spring Data JPA and Hibernate integration.-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>2.6.3</version>
         </dependency>
 
-        <!-- Spring Boot Starter Test -->
+        <!-- Spring Boot Starter Test: This dependency pulls in the Spring Boot Starter Test library,
+        which provides testing support for the project -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -36,6 +39,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- These dependencies are used for JSON serialization and deserialization. -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -54,30 +58,30 @@
             <version>2.14.2</version>
         </dependency>
 
+        <!-- Provides several annotations to reduce boilerplate code in Java classes
+        such as getters, setters, and constructors -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
             <scope>compile</scope>
         </dependency>
+
+        <!--MySQL JDBC driver, which is needed to connect to a MySQL database from a Java application-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
         </dependency>
 
+        <!-- provides an implementation of the Java Bean Validation API,
+        which allows you to define constraints on the fields of your classes.
+        It provides several annotations like @NotNull and @Size to enforce constraints-->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.17.Final</version>
         </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
-
     </dependencies>
 
 </project>
