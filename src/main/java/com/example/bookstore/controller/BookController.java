@@ -1,9 +1,9 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.exception.BookAlreadyExistsException;
 import com.example.bookstore.exception.BookNotFoundException;
 import com.example.bookstore.exception.CategoryNotFoundException;
 import com.example.bookstore.exception.ErrorResponse;
-import com.example.bookstore.exception.InvalidFormatException;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Category;
 import com.example.bookstore.repository.BookRepository;
@@ -11,15 +11,11 @@ import com.example.bookstore.service.BookService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/books")
@@ -34,16 +30,19 @@ public class BookController {
         this.bookService = bookService;
     }
 
-
     @PostMapping
-    public ResponseEntity<Object> addBook(@Valid @RequestBody Book book)  {
+    public ResponseEntity<Object> addBook( @Valid @RequestBody Book book)  {
+        boolean exists = bookRepository.existsByTitleAndAuthor(book.getTitle(), book.getAuthor());
+        if (exists) {
+            throw new BookAlreadyExistsException("Book with title '" + book.getTitle() + "' and author '" + book.getAuthor() + "' already exists.");
+        }
         try {
             bookRepository.save(book);
             return new ResponseEntity<>("Book added successfully", HttpStatus.OK);
-        }catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException(e.getMessage());
         } catch (Exception e) {
-            throw new InvalidFormatException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -105,23 +104,13 @@ public class BookController {
         }
         return books;
     }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleDataIntegrityViolationException(HttpServletRequest request, DataIntegrityViolationException ex) {
         String errorMessage = "InValid request";
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),errorMessage ,LocalDateTime.now());
-        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(errorResponse.getStatus()));
-
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-        BindingResult bindingResult = ex.getBindingResult();
-        List<ObjectError> allErrors = bindingResult.getAllErrors();
-        List<String> errorMessages = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),errorMessages.toString() ,LocalDateTime.now());
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),errorMessage , LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(errorResponse.getStatus()));
     }
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
@@ -130,6 +119,5 @@ public class BookController {
         errorResponse.setMessage(ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
-
 }
 

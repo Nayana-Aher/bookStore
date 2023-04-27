@@ -2,6 +2,8 @@ package com.example.bookstore.model;
 
 import com.sun.istack.NotNull;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "book")
@@ -10,9 +12,11 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min=2, max=50)
     @Column(nullable = false,name = "title")
     private String title;
 
+    @Size(min=2, max=50)
     @Column(nullable = false,name = "author")
     private String author;
 
@@ -21,6 +25,7 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Min(0)
     @Column(nullable = false,name = "price")
     private double price;
 
