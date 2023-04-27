@@ -18,8 +18,8 @@ To get started with the project, follow these steps:
 4. Build the project using Maven by running `mvn clean install` from the command line.
 5. Run the project using your IDE or by running the generated jar file from the command line: `java -jar target/bookstore-0.0.1-SNAPSHOT.jar`
 
-## API Documentation
-This application uses Swagger to document its API. Once the application is running, navigate to http://localhost:8080/swagger-ui.html in your web browser to access the Swagger documentation.
+## API Exploring
+This application uses Swagger generates a user-friendly UI for interacting with the API. Once the application is running, navigate to http://localhost:8080/swagger-ui.html in your web browser for exploring and testing RESTful APIs.
 
 ## Endpoints
 
